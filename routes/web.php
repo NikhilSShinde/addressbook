@@ -22,8 +22,3 @@ Route::POST('update-address/{slug}', 'AdressBookController@update');
 Route::GET('show-address/{slug}', 'AdressBookController@show');
 
 Route::delete('delete-address/{slug}', 'AdressBookController@destroy');
-
-
-Route::get('/redis', function(){
-    print_r(app()->make('redis'));
-});

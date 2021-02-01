@@ -147,11 +147,7 @@ class AdressBookController extends Controller
      */
     public function show($slug)
     {
-        $redis = Redis::connection();
-        $user = Redis::get('user:profile:'.$slug);
         $address = Address::where('slug',$slug)->first();
-
-        dd($user);
 
         //Log the activity.
         Log::channel('addressbook')->info('Showing the address information for address id: '.$address['id']);

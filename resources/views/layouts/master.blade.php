@@ -57,51 +57,6 @@
   });
 
 
-  function checkAll(bx) {
-    var cbs = document.getElementsByTagName('input');
-    for (var i = 0; i < cbs.length; i++) {
-      if (cbs[i].type == 'checkbox') {
-        cbs[i].checked = bx.checked;
-      }
-    }
-  }
-
-  function parentCategory() {
-
-    var x = $("#parent_category").val();
-    if (x == '--select--') {
-      $('#sub_category').empty();
-      $('#child_category').empty();
-    }
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    $.ajax({
-      type: 'post',
-      data: {
-        'id': x
-      },
-      url: "{{ url('get-sub-child')}}",
-      success: function(result) {
-
-        $('#sub_category').empty();
-        $('#sub_category').append($("<option>--select--</option>").attr({
-          "value": ''
-        }));
-        for (var i = 0; i < result.length; i++) {
-          var id = result[i].id;
-          var s_cat = result[i].s_cat;
-          $('#sub_category').append($("<option></option>").attr({
-            "value": id
-          }).text(s_cat)).trigger("chosen:updated");
-        }
-      }
-    });
-  }
-
   // Read Url of image file and show the content.
   function readURL(input) {
 
@@ -165,19 +120,5 @@ $("#file").change(function(e) {
 });
 </script>
 
-<script>
-  $("#complexConfirm").confirm({
-    title:"Delete confirmation",
-    text:"This is very dangerous, you shouldn't do it! Are you really really sure?",
-    confirm: function(button) {
-        alert("You just confirmed.");
-    },
-    cancel: function(button) {
-        alert("You aborted the operation.");
-    },
-    confirmButton: "Yes I am",
-    cancelButton: "No"
-});
-</script>
 
 </html>
